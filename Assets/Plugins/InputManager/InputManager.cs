@@ -11,7 +11,7 @@ namespace Wsc.Input
             Button = new Bus<bool>(false);
             ButtonUp = new Bus<bool>(false);
         }
-        public InputManager(IBehaviour behaviour) : this()
+        public InputManager(IBehaviourEvent behaviour) : this()
         {
             behaviour.AfterUpdate += Reset;
         }
