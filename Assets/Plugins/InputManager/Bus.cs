@@ -6,7 +6,6 @@ namespace Wsc.Input
     {
         public Bus(T defaultValue)
         {
-            this.defaultValue = defaultValue;
             inputs = new DictionaryWithListKey<string, T>(defaultValue);
         }
         ~Bus()
@@ -14,7 +13,6 @@ namespace Wsc.Input
             inputs.Clear();
             inputs = null;
         }
-        private T defaultValue;
         private DictionaryWithListKey<string, T> inputs;
 
         public T Get(string key)
@@ -29,7 +27,7 @@ namespace Wsc.Input
 
         public void Reset()
         {
-            inputs.SetAll(defaultValue);
+            inputs.Reset();
         }
     }
 }

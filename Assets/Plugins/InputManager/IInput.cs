@@ -2,9 +2,9 @@ namespace Wsc.Input
 {
     public interface IInput
     {
-        float GetAxis(string axisName);
-        bool GetButtonDown(string buttonName);
-        bool GetButton(string buttonName);
-        bool GetButtonUp(string buttonName);
+        void SetAxis(string axisName, float value);
+        void SetButtonDown(string buttonName);
+        void SetButton(string buttonName);
+        void SetButtonUp(string buttonName);
     }
 }

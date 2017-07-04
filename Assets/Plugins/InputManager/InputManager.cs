@@ -1,8 +1,10 @@
-﻿using Wsc.Behaviour;
+﻿using System;
+using UnityEngine;
+using Wsc.Behaviour;
 
 namespace Wsc.Input
 {
-    public class InputManager : IInput
+    public class InputManager : IInput, IOutput
     {
         private InputManager()
         {
@@ -13,7 +15,17 @@ namespace Wsc.Input
         }
         public InputManager(IBehaviourEvent behaviour) : this()
         {
+            this.behaviour = behaviour;
             behaviour.AfterUpdate += Reset;
+        }
+        ~InputManager()
+        {
+            behaviour.AfterUpdate -= Reset;
+            behaviour = null;
+            Axis = null;
+            ButtonDown = null;
+            Button = null;
+            ButtonUp = null;
         }
         void Reset()
         {
@@ -23,6 +35,7 @@ namespace Wsc.Input
             ButtonUp.Reset();
         }
 
+        private IBehaviourEvent behaviour;
         #region Axis
         private Bus<float> Axis;
         #endregion
@@ -33,27 +46,60 @@ namespace Wsc.Input
         private Bus<bool> ButtonUp;
         #endregion
 
-
-
-        float IInput.GetAxis(string axisName)
+        float IOutput.GetAxis(string axisName)
         {
             return Axis.Get(axisName);
         }
 
-        bool IInput.GetButtonDown(string buttonName)
+        bool IOutput.GetButtonDown(string buttonName)
         {
             return ButtonDown.Get(buttonName);
         }
 
-        bool IInput.GetButton(string buttonName)
+        bool IOutput.GetButton(string buttonName)
         {
             return Button.Get(buttonName);
         }
 
-        bool IInput.GetButtonUp(string buttonName)
+        bool IOutput.GetButtonUp(string buttonName)
         {
             return ButtonUp.Get(buttonName);
         }
+
+        void IInput.SetAxis(string axisName, float value)
+        {
+            Axis.Set(axisName, value);
+        }
+
+        void IInput.SetButtonDown(string buttonName)
+        {
+            ButtonDown.Set(buttonName, true);
+        }
+
+        void IInput.SetButton(string buttonName)
+        {
+            Button.Set(buttonName, true);
+        }
+
+        void IInput.SetButtonUp(string buttonName)
+        {
+            ButtonUp.Set(buttonName, true);
+        }
+
+
+        #region HardwareInput
+        private HardwareInput hardwareInput;
+        public void AddKeyBoardInput(KeyCode code, string key)
+        {
+            // hardwareInput.
+        }
+        public void AddAxisInput(string code, string key)
+        {
+
+        }
+        #endregion
+
+
     }
 
 }
