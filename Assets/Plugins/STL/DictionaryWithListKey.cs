@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Wsc.STL
@@ -13,7 +14,7 @@ namespace Wsc.STL
         {
             this.defaultValue = defaultValue;
         }
-        
+
         TValue defaultValue;
         List<TKey> keys;
         Dictionary<TKey, TValue> dict;
@@ -27,11 +28,11 @@ namespace Wsc.STL
             dict[key] = value;
         }
 
-        public void SetAll(TValue value)
+        public void Reset()
         {
             for (int i = keys.Count - 1; i >= 0; i--)
             {
-                dict[keys[i]] = value;
+                dict[keys[i]] = defaultValue;
             }
         }
 
@@ -42,6 +43,18 @@ namespace Wsc.STL
                 return defaultValue;
             }
             return dict[key];
+        }
+
+        public void Traversal(Func<TKey, TValue, bool> onTraversal)
+        {
+            if (onTraversal == null) { return; }
+            for (int i = 0, count = keys.Count; i < count; i++)
+            {
+                if (onTraversal(keys[i], dict[keys[i]]))
+                {
+                    return;
+                }
+            }
         }
 
         public void Clear()
