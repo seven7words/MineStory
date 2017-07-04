@@ -13,6 +13,7 @@ namespace Wsc.STL
         {
             this.defaultValue = defaultValue;
         }
+        
         TValue defaultValue;
         List<TKey> keys;
         Dictionary<TKey, TValue> dict;
@@ -41,6 +42,12 @@ namespace Wsc.STL
                 return defaultValue;
             }
             return dict[key];
+        }
+
+        public void Clear()
+        {
+            dict.Clear();
+            keys.Clear();
         }
     }
 }
