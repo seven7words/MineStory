@@ -13,7 +13,7 @@ namespace Wsc.Asset
         }
         ~AssetManager()
         {
-
+            abManager = null;
         }
 
         public AssetBundleManager abManager;
