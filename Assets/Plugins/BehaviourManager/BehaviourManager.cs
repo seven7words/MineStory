@@ -1,9 +1,10 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Wsc.Behaviour
 {
-    public class BehaviourManager : IBehaviourEvent
+    public class BehaviourManager : IBehaviourEvent, IBehaviourHandle
     {
         public BehaviourManager()
         {
@@ -32,6 +33,16 @@ namespace Wsc.Behaviour
         {
             add { handler.AfterUpdate += value; }
             remove { handler.AfterUpdate -= value; }
+        }
+
+        Coroutine IBehaviourHandle.StartCoroutine(IEnumerator routine)
+        {
+            return handler.StartCoroutine(routine);
+        }
+
+        void IBehaviourHandle.StopCoroutine(Coroutine coroutine)
+        {
+            handler.StopCoroutine(coroutine);
         }
     }
 }
