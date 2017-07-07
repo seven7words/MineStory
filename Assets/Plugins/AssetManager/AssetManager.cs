@@ -1,8 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Wsc.Behaviour;
 
-public class AssetManager
+namespace Wsc.Asset
 {
+    public class AssetManager
+    {
+        public AssetManager(IBehaviourHandler behaviourHandler)
+        {
+            abManager = new AssetBundleManager(behaviourHandler);
+        }
+        ~AssetManager()
+        {
 
+        }
+
+        public AssetBundleManager abManager;
+    }
 }
