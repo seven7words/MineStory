@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Wsc.Behaviour
 {
-    public class BehaviourManager : IBehaviourEvent, IBehaviourHandle
+    public class BehaviourManager : IBehaviourEvent, IBehaviourHandler
     {
         public BehaviourManager()
         {
@@ -35,12 +35,12 @@ namespace Wsc.Behaviour
             remove { handler.AfterUpdate -= value; }
         }
 
-        Coroutine IBehaviourHandle.StartCoroutine(IEnumerator routine)
+        Coroutine IBehaviourHandler.StartCoroutine(IEnumerator routine)
         {
             return handler.StartCoroutine(routine);
         }
 
-        void IBehaviourHandle.StopCoroutine(Coroutine coroutine)
+        void IBehaviourHandler.StopCoroutine(Coroutine coroutine)
         {
             handler.StopCoroutine(coroutine);
         }
