@@ -38,6 +38,10 @@ namespace Wsc.Input
         }
 
         private DictionaryWithListKey<KeyCode, string> keyboards;
+        public void AddKeyBoard(KeyCode code, string key)
+        {
+            keyboards.Add(code, key);
+        }
         private bool TraversalKeyBoard(KeyCode code, string key)
         {
             if (UnityEngine.Input.GetKeyDown(code))
@@ -56,6 +60,10 @@ namespace Wsc.Input
         }
 
         private DictionaryWithListKey<string, string> axises;
+        public void AddAxis(string code, string key)
+        {
+            axises.Add(code, key);
+        }
         private bool TraversalAxis(string code, string key)
         {
             input.SetAxis(key, UnityEngine.Input.GetAxis(code));

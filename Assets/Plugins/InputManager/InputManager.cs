@@ -17,6 +17,8 @@ namespace Wsc.Input
         {
             this.behaviour = behaviour;
             behaviour.AfterUpdate += Reset;
+
+            hardwareInput = new HardwareInput(behaviour, this);
         }
         ~InputManager()
         {
@@ -91,11 +93,11 @@ namespace Wsc.Input
         private HardwareInput hardwareInput;
         public void AddKeyBoardInput(KeyCode code, string key)
         {
-            // hardwareInput.
+            hardwareInput.AddKeyBoard(code, key);
         }
         public void AddAxisInput(string code, string key)
         {
-
+            hardwareInput.AddAxis(code, key);
         }
         #endregion
 
